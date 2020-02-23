@@ -1,0 +1,282 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/html">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  {% bootstrap_css %}
+
+  <title>{Homolog} - SIOF</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link rel="stylesheet" href="{% static 'css/sb-admin-2.min.css' %}">
+  <script src="https://kit.fontawesome.com/abd27dbf48.js" crossorigin="anonymous"></script>
+
+<script type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Incluindo o menu lateral -->
+    {% include 'panpharma_producao/functions_ppp/menu.html' %}
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Consulta de Codelists</h1>
+          </div>
+
+          <!-- Incluindo a top bar -->
+          {% include 'panpharma_producao/functions_ppp/topbar.html' %}
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Quantidade de conexões ativas</div>
+                        <div class="h6 mb-0 font-weight-bold text-gray-550">350</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-print text-gray-300 fa-2x"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Quantidade de conexões ativas</div>
+                        <div class="h6 mb-0 font-weight-bold text-gray-550">teste</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-print text-gray-300 fa-2x"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="example_length">
+                      <label>
+                        Resultados por página
+                        <select name="example_length" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm">
+                          <option value="10">1</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div id="example_filter" class="dataTables_filter">
+                      <label>
+                        Pesquisar:
+                        <form method="GET" action=".">
+                          <input type="text" id="search" name="search" class="form-control" placeholder="Código do cliente">
+                        </form>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <h6 class="m-0 font-weight-bold text-primary"></h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th scope='col'>#</th>
+                        <th scope='col'>Código do Cliente</th>
+                        <th scope='col'>Mapa</th>
+                        <th scope='col'>Van</th>
+                        <th scope='col'>Apontador</th>
+                        <th scope='col'>Opções</th>
+                      </tr>
+                    </thead>
+                      <tbody>
+                        {% for code in codelists %}
+                          <tr>
+                            <td scope="row">{{ code.id }}</td>
+                            <td scope="row">{{ code.codigo_cliente }}</td>
+                            <td scope="row">{{ code.mapa }}</td>
+                            <td scope="row">{{ code.van }}</td>
+                            <td scope="row">{{ code.apontador }}</td>
+                            <td scope="row">
+          						<a href="#modal{{ code.id }}" class="btn btn-info btn-circle btn-sm" data-placement="top" title="Visualizar Codelist" data-toggle="modal"><i class="fas fa-file-alt" aria-hidden="true"></i></a>
+          						<a href="#" class="btn btn-info btn-circle btn-sm" data-placement="top" title="Atualização de IP" data-toggle="modal"><i class="fas fa-server" aria-hidden="true"  data-toggle="modal" data-target="#view-modal" data-id="<?php echo $row['id']; ?>" id="getUser"></i></a>
+          						<a href="#" class="btn btn-info btn-circle btn-sm" data-placement="top" title="Atualização de Porta!!!" data-toggle="modal"><i class="fas fa-door-open" aria-hidden="true" data-toggle="modal"  data-target="#view-modal1" data-id="<?php echo $row['id']; ?>" id="getUser1"></i></a>
+                                <a href="#" class="btn btn-info btn-circle btn-sm" data-placement="top" title="Operações Spool" data-toggle="modal"><i class="fa fa-print" aria-hidden="true" data-toggle="modal"  data-target="#view-modal3" data-id="<?php echo $row['id']; ?>" id="getUser3"></i></a>
+                          </tr>
+                          <div class="modal" id="modal{{ code.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">
+                                    <i class="glyphicon glyphicon-user">Informações do Codelist</i>
+                                  </h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div>
+                                    <h5><b>Código do cliente: </b><span>{{code.codigo_cliente}}</span></h5>
+                                    <h5><b>Mapa: </b><span>{{code.mapa}}</span></h5>
+                                    <h5><b>Van: </b><span>{{code.van}}</span></h5>
+                                    <h5><b>Apontador: </b><span>{{code.apontador}}</span></h5>
+                                    <h5><b>Quebra?: </b><span>{{code.quebra}}</span></h5>
+                                    <h5><b>Mapa retorno atendidos: </b><span>{{code.mapa_retorno_atendidos}}</span></h5>
+                                    <h5><b>Mapa retorno não atendidos: </b><span>{{code.mapa_retorno_nao_atendidos}}</span></h5>
+                                    <h5><b>Extensão retorno itens atendidos: </b><span>{{code.extensao_retorno_itens_atendidos}}</span></h5>
+                                    <h5><b>Extensão retorno itens não atendidos: </b><span>{{code.extensao_retorno_itens_nao_atendidos}}</span></h5>
+                                    <h5><b>Máscara retorno atendidos: </b><span>{{code.mascara_retorno_atendidos}}</span></h5>
+                                    <h5><b>Máscara retorno não atendidos: </b><span>{{code.mascara_retorno_nao_atendidos}}</span></h5>
+                                    <h5><b>Sobrepõe arquivo?: </b><span>{{code.sobrepoe_arquivo}}</span></h5>
+                                    <h5><b>Mapa retorno NF: </b><span>{{code.mapa_retorno_nf}}</span></h5>
+                                    <h5><b>Máscara NF: </b><span>{{code.mascara_nf}}</span></h5>
+                                    <h5><b>Extensão NF: </b><span>{{code.extensao_nf}}</span></h5>
+                                    <h5><b>Sobrepões NF?: </b><span>{{code.sobrepoe_nf}}</span></h5>
+                                    <h5><b>Usuário arquivo preço: </b><span>{{code.usuario_arquivo_preco}}</span></h5>
+                                    <h5><b>Máscara remessa arquivo preço: </b><span>{{code.mascara_remessa_arq_preco}}</span></h5>
+                                    <h5><b>Move arquivo preço?: </b><span>{{code.move_arq_preco}}</span></h5>
+                                    <h5><b>Diretório arquivo preço: </b><span>{{code.diretorio_arq_preco}}</span></h5>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+        </div>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; Grupo SC 2019</span>
+        </div>
+      </div>
+    </footer>
+
+
+
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+  <!-- MODAL -->
+  <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <i class="glyphicon glyphicon-user">Informações do Codelist</i>
+          </h4>
+        </div>
+        <div class="modal-body">
+          <container>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+          </container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tem certeza ?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+
+          </button>
+        </div>
+        <div class="modal-body"><span aria-hidden="true">O usuário <?php echo $usuario; ?> será desconectado !!!</span></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="function/logout.php">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% bootstrap_javascript jquery='full' %}
+  <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{% static 'js/sb-admin-2.min.js'%}"></script>
+
+  <!-- Page level plugins -->
+  <script src="{% static 'vendor/chart.js/Chart.min.js'%}"></script>
+
+  <!-- Page level custom scripts
+  <script src="../../biblioteca/js/demo/chart-area-demo.js"></script>
+  <script src="../../biblioteca/js/demo/chart-pie-demo.js"></script> -->
+
+    <!-- Page level plugins -->
+  <script src="{% static 'vendor/datatables/jquery.dataTables.js'%}"></script>
+  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+
+
+</body>
+
+<script>
+
+</script>
+</html>

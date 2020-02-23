@@ -1,0 +1,271 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{Homolog} - SIOF</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link rel="stylesheet" href="{% static 'css/sb-admin-2.min.css' %}">
+  <script src="https://kit.fontawesome.com/abd27dbf48.js" crossorigin="anonymous"></script>
+
+
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    <!-- Incluindo o menu lateral -->
+    {% include 'panpharma_homolog/functions_pph/menu.html' %}
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Cadastro de Usuários Codelists</h1>
+          </div>
+
+          <!-- Incluindo a top bar -->
+          {% include 'panpharma_homolog/functions_pph/topbar.html' %}
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Quantidade de conexões ativas</div>
+                        <div class="h6 mb-0 font-weight-bold text-gray-550">350</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-print text-gray-300 fa-2x"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Quantidade de conexões ativas</div>
+                        <div class="h6 mb-0 font-weight-bold text-gray-550">teste</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-print text-gray-300 fa-2x"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-10">
+                <div class="card mb-4">
+                <div class="card-header" align="left">
+                    <h5>Cadastro de usuários:</h5>
+                    {% bootstrap_messages %}
+
+                    <form action="" method="post" class="form" autocomplete="off">
+                        {% csrf_token %}
+
+                        {% bootstrap_form_errors form type='non_fields' %}
+
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.codigo_cliente size='md' placeholder='Informe o código do cliente' %}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.mapa size='md' %}
+                          </div>
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.van size='md' %}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.apontador placeholder='Infome o apontador...' size='md' %}
+                          </div>
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.quebra size='md' %}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.mapa_retorno_atendidos size='md' %}
+                          </div>
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.mapa_retorno_nao_atendidos size='md' %}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.extensao_retorno_itens_atendidos size='md' %}
+                          </div>
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.extensao_retorno_itens_nao_atendidos size='md' %}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.mascara_retorno_atendidos placeholder='Informe a máscara de atendidos' size='md' %}
+                          </div>
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.mascara_retorno_nao_atendidos placeholder='Informe a máscara de não atendidos' size='md' %}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.sobrepoe_arquivo size='md' %}
+                          </div>
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.mapa_retorno_nf size='md' %}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.mascara_nf placeholder='Informe a Máscara para Nota Fiscal' size='md' %}
+                          </div>
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.extensao_nf size='md' %}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.sobrepoe_nf size='md' %}
+                          </div>
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.usuario_arquivo_preco placeholder='Informe o usuário' size='md' %}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-12">
+                            {% bootstrap_field form.mascara_remessa_arq_preco placeholder='Informe a máscara'%}
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.move_arq_preco size='md' %}
+                          </div>
+                          <div class="form-group col-md-6">
+                            {% bootstrap_field form.diretorio_arq_preco placeholder='Informe o diretório' size='md' %}
+                          </div>
+                        </div>
+
+
+                        {% buttons %}
+                            <button class="btn btn-primary" type="submit">Enviar</button>
+                            <input type="reset" value="Limpar formulário" class="btn btn-primary">
+                        {% endbuttons %}
+
+                      </form>
+
+    					</div>
+            </div>
+          </div>
+
+        </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; Grupo SC 2019</span>
+        </div>
+      </div>
+    </footer>
+
+
+
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tem certeza ?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+
+          </button>
+        </div>
+        <div class="modal-body"><span aria-hidden="true">O usuário <?php echo $usuario; ?> será desconectado !!!</span></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="function/logout.php">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{% static 'js/sb-admin-2.min.js'%}"></script>
+
+  <!-- Page level plugins -->
+  <script src="{% static 'vendor/chart.js/Chart.min.js'%}"></script>
+
+  <!-- Page level custom scripts
+  <script src="../../biblioteca/js/demo/chart-area-demo.js"></script>
+  <script src="../../biblioteca/js/demo/chart-pie-demo.js"></script> -->
+
+    <!-- Page level plugins -->
+  <script src="{% static 'vendor/datatables/jquery.dataTables.js'%}"></script>
+  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+
+</body>
+
+<script>
+
+</script>
+</html>
